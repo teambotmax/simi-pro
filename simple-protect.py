@@ -200,7 +200,6 @@ while True:
     try:
     #ops = myBotsClient[myBotsMid[0]].fetchOps(123) #YOU MUST USE CORRECT VALUE :)
         ops = myBotsClient[myBotsMid[0]].fetchOperations()
-        print(ops)
         for op in ops:
             if op.revision > myBotsClient[myBotsMid[0]].lastOp:
                 try:
