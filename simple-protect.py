@@ -197,12 +197,16 @@ def worker(op):
             myBotsClient[myBotsMid[0]].sendMessage(to,'ok')
             
 while True:
+    try:
     #ops = myBotsClient[myBotsMid[0]].fetchOps(123) #YOU MUST USE CORRECT VALUE :)
-    ops = myBotsClient[myBotsMid[0]].fetchOperations()
-    for op in ops:
-        if op.revision > myBotsClient[myBotsMid[0]].lastOp:
-            try:
-                worker(op)
-            except Exception as e:
-                print(e)
-            myBotsClient[myBotsMid[0]].lastOp = max(op.revision, myBotsClient[myBotsMid[0]].lastOp)
+        ops = myBotsClient[myBotsMid[0]].fetchOperations()
+        print(ops)
+        for op in ops:
+            if op.revision > myBotsClient[myBotsMid[0]].lastOp:
+                try:
+                    worker(op)
+                except Exception as e:
+                    print(e)
+                myBotsClient[myBotsMid[0]].lastOp = max(op.revision, myBotsClient[myBotsMid[0]].lastOp)
+    except:
+        pass
